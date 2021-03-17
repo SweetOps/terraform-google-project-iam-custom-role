@@ -1,21 +1,42 @@
-# terraform-module-template
-![](https://github.com/actions/hello-world/workflows/.github/workflows/main.yml/badge.svg)
+# terraform-google-project-iam-custom-role
 
-Terraform module for creation **CHAMGE_ME** with normalized name and tags.
+Terraform module to proviosion IAM custom role.
 
 ## Usage
 
 ```hcl
-module "your_aweasome_resource" {
-  source    = ""
+module "label" {
+  source    = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
   namespace = "sweetops"
   stage     = "production"
   name      = "aweasome"
 }
+
+module "your_aweasome_role" {
+  source = "git::https://github.com/SweetOps/terraform-google-service-account.git?ref=master"
+
+  permissions = [
+    "compute.disks.create",
+    "compute.disks.delete",
+    "compute.disks.get",
+    "compute.disks.list",
+    "compute.disks.use",
+  ]
+
+  context = module.label.context
+}
+
+module "your_aweasome_role_service_account" {
+  source = "git::https://github.com/SweetOps/terraform-google-service-account.git?ref=master"
+
+  roles = [module.your_aweasome_role.name, "roles/iam.serviceAccountUser"]
+
+  context = module.label.context
+}
+
 ```
 
 <!--- BEGIN_TF_DOCS --->
-Error: no lines in file
 
 <!--- END_TF_DOCS --->
 
