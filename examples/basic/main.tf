@@ -20,7 +20,7 @@ module "your_aweasome_role" {
 }
 
 module "your_aweasome_role_service_account" {
-  source = "git::https://github.com/SweetOps/terraform-google-service-account.git?ref=master"
+  source = "git::https://github.com/SweetOps/terraform-google-project-iam-custom-role.git?ref=master"
 
   roles = [module.your_aweasome_role.name, "roles/iam.serviceAccountUser"]
 
