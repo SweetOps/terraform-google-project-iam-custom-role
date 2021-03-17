@@ -111,7 +111,7 @@ variable "name" {
 
 variable "delimiter" {
   type        = string
-  default     = null
+  default     = "_"
   description = <<-EOT
     Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes`.
     Defaults to `-` (hyphen). Set to `""` to use no delimiter at all.
